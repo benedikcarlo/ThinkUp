@@ -578,6 +578,10 @@ color: #417505 !important;
   {assign var='color_light' value='fee4e7'}
 {/if}
 
+{assign var="bio_diff" value=""}
+{assign var="avatar_before" value=""}
+{assign var="avatar_after" value=""}
+
 <table class="row insight insight-{$color_name}" style="border-spacing: 0; border-collapse: collapse; vertical-align: top; text-align: left; width: 100%; position: relative; display: block; border-top-width: 5px; border-top-color: #{$color_dark}; border-top-style: solid; border-bottom-style: solid; border-bottom-color: #{$color}; border-bottom-width: 2px; margin-bottom: 14px; background: #{$color}; padding: 0px;">
   <tr style="vertical-align: top; text-align: left; padding: 0;" align="left">
     <td class="wrapper last" style="word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; border-collapse: collapse !important; vertical-align: top; text-align: left; position: relative; color: #222222; font-family: 'Helvetica', 'Arial', sans-serif; font-weight: normal; line-height: 19px; font-size: 14px; margin: 0; padding: 10px 0px 0px;" align="left" valign="top">
@@ -658,10 +662,6 @@ or isset($insight->related_data.changes)}
             {assign var="avatar_before" value=$change.before}
             {assign var="avatar_after" value=$change.after}
           {/if}
-        {else}
-          {assign var="bio_diff" value=""}
-          {assign var="avatar_before" value=""}
-          {assign var="avatar_after" value=""}
         {/if}
 
         {if isset($user->network) and isset($user->user_id) and isset($user->avatar)}
@@ -669,7 +669,7 @@ or isset($insight->related_data.changes)}
             <td class="sub-grid object user text-pad" style="word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; border-collapse: collapse !important; vertical-align: top; text-align: left; color: #222; font-family: 'Helvetica', 'Arial', sans-serif; font-weight: normal; line-height: 18px; font-size: 14px; margin: 0 0 10px; padding: 10px;" align="left" valign="top">
                 <table style="border-spacing: 0; border-collapse: collapse; vertical-align: top; text-align: left; width: 100%; padding: 0;">
                     <tr style="vertical-align: top; text-align: left; padding: 0;" align="left">
-                       {if isset($avatar_before) && $avatar_before neq ''}
+                       {if $avatar_before neq ''}
                         <td class="twelve sub-columns" style="word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; border-collapse: collapse !important; vertical-align: top; text-align: left; min-width: 0px; width: 100%; color: #222; font-family: 'Helvetica', 'Arial', sans-serif; font-weight: normal; line-height: 18px; font-size: 14px; margin: 0; padding: 10px 10px 0 0px;" align="left" valign="top">
                         {else}
                         <td class="two sub-columns center" style="word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; border-collapse: collapse !important; vertical-align: top; text-align: center; min-width: 0px; width: 16.666666%; color: #222; font-family: 'Helvetica', 'Arial', sans-serif; font-weight: normal; line-height: 18px; font-size: 14px; margin: 0; padding: 10px 10px 0 0px;" align="center" valign="top">
@@ -686,9 +686,9 @@ or isset($insight->related_data.changes)}
                                     {$user->other.total_likes|number_format} likes
                                     {/if}
                                 {/if}</p>
-                                {if isset($bio_diff) && $bio_diff neq ''}
+                                {if $bio_diff neq ''}
                                     <p class="text-diff" style="color: #222222; font-family: 'Helvetica', 'Arial', sans-serif; font-weight: normal; text-align: left; line-height: 19px; font-size: 14px; margin: 0 0 10px; padding: 0;" align="left">{$bio_diff}</p>
-                                {elseif isset($avatar_before) && $avatar_before neq '' }
+                                {elseif $avatar_before neq '' }
                                 <div class="avatar-change">
                                  <table class="table" style="border-spacing: 0; border-collapse: collapse; vertical-align: top; text-align: left; width: 225px; table-layout: fixed; padding: 0;">
                                      <tr style="vertical-align: top; text-align: left; padding: 0;" align="left">

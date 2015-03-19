@@ -1225,6 +1225,10 @@ body.outlook p {
   {assign var='color_light' value='fee4e7'}
 {/if}
 
+{assign var="bio_diff" value=""}
+{assign var="avatar_before" value=""}
+{assign var="avatar_after" value=""}
+
 <table class="row insight insight-{$color_name}">
   <tr>
     <td class="wrapper last">
@@ -1305,10 +1309,6 @@ or isset($insight->related_data.changes)}
             {assign var="avatar_before" value=$change.before}
             {assign var="avatar_after" value=$change.after}
           {/if}
-        {else}
-          {assign var="bio_diff" value=""}
-          {assign var="avatar_before" value=""}
-          {assign var="avatar_after" value=""}
         {/if}
 
         {if isset($user->network) and isset($user->user_id) and isset($user->avatar)}
@@ -1316,7 +1316,7 @@ or isset($insight->related_data.changes)}
             <td class="sub-grid object user text-pad">
                 <table>
                     <tr>
-                       {if isset($avatar_before) && $avatar_before neq ''}
+                       {if $avatar_before neq ''}
                         <td class="twelve sub-columns">
                         {else}
                         <td class="two sub-columns center">
@@ -1333,9 +1333,9 @@ or isset($insight->related_data.changes)}
                                     {$user->other.total_likes|number_format} likes
                                     {/if}
                                 {/if}</p>
-                                {if isset($bio_diff) && $bio_diff neq ''}
+                                {if $bio_diff neq ''}
                                     <p class="text-diff">{$bio_diff}</p>
-                                {elseif isset($avatar_before) && $avatar_before neq '' }
+                                {elseif $avatar_before neq '' }
                                 <div class="avatar-change">
                                  <table class="table">
                                      <tr>
